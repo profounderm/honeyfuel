@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
-    <script src="https://js.stripe.com/v3/"></script>
     <style>
         :root {
             --amber-dark: #D4A574;
@@ -637,9 +636,6 @@
     </footer>
 
     <script>
-        // Initialize Stripe
-        const stripe = Stripe('pk_live_51SqFFiQ1Pqo8kfTbyLj8FUAFUwUgqLbO9krB126Ld2h9kS3OJMo3i24OgGgvcv2MiLuZopHDz3IejFL2W8TQiUmT00ej9TYcQJ');
-        
         // Scroll reveal animation
         const revealElements = document.querySelectorAll('.reveal');
         
@@ -662,38 +658,9 @@
             document.getElementById('product').scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Stripe Checkout handler
-        async function handleCheckout() {
-            const button = document.getElementById('checkout-btn');
-            button.disabled = true;
-            button.querySelector('span').textContent = 'Loading...';
-            
-            try {
-                const { error } = await stripe.redirectToCheckout({
-                    lineItems: [{
-                        price: 'price_1SqFvrQ1Pqo8kfTbhRDM5Yer',
-                        quantity: 1,
-                    }],
-                    mode: 'payment',
-                    successUrl: window.location.origin + '/success.html',
-                    cancelUrl: window.location.origin,
-                    shippingAddressCollection: {
-                        allowedCountries: ['US'],
-                    },
-                });
-                
-                if (error) {
-                    console.error('Stripe error:', error);
-                    alert('Stripe Error: ' + error.message + '\n\nPlease check:\n1. Your Stripe account is fully activated\n2. The Price ID is correct\n3. Payment methods are enabled in your Stripe settings');
-                    button.disabled = false;
-                    button.querySelector('span').textContent = 'Secure Checkout';
-                }
-            } catch (err) {
-                console.error('Checkout error:', err);
-                alert('Error: ' + err.message + '\n\nTroubleshooting:\n1. Make sure your Stripe account is fully set up\n2. Verify the Price ID exists in your Stripe dashboard\n3. Check that your domain is added in Stripe settings');
-                button.disabled = false;
-                button.querySelector('span').textContent = 'Secure Checkout';
-            }
+        // Stripe Payment Link checkout
+        function handleCheckout() {
+            window.location.href = 'https://buy.stripe.com/6oU14pgqR6rVgCA2C583C00';
         }
     </script>
 </body>
