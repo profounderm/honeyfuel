@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed — Honey Fuel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --amber-dark: #D4A574;
+            --amber-light: #F2D4A0;
+            --stone: #2A2520;
+            --stone-light: #4A4037;
+            --parchment: #F5F0E8;
+            --gold: #C9A961;
+            --shadow: rgba(42, 37, 32, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--parchment);
+            color: var(--stone);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(201, 169, 97, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .success-container {
+            max-width: 700px;
+            background: white;
+            padding: 4rem 3rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            box-shadow: 0 20px 60px var(--shadow);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: scaleIn 0.5s ease-out 0.3s backwards;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        .checkmark svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: drawCheck 0.5s ease-out 0.6s forwards;
+        }
+        
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+            color: var(--stone);
+        }
+        
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 2rem auto;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--stone-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .order-info {
+            background: var(--parchment);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 3px solid var(--gold);
+        }
+        
+        .order-info p {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .cta-button {
+            background: var(--stone);
+            color: var(--parchment);
+            padding: 1rem 2.5rem;
+            border: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        
+        .cta-button:hover {
+            background: var(--stone-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="checkmark">
+            <svg viewBox="0 0 52 52">
+                <polyline points="14 27 22 35 38 19"/>
+            </svg>
+        </div>
+        
+        <h1>Order Confirmed!</h1>
+        <div class="divider"></div>
+        
+        <p>
+            Thank you for your purchase. Your Honey Fuel order has been confirmed and is being prepared for shipment.
+        </p>
+        
+        <div class="order-info">
+            <p><strong>What happens next:</strong></p>
+            <p>• You'll receive an email confirmation with your order details</p>
+            <p>• Your order will ship within 1-2 business days</p>
+            <p>• Tracking information will be sent to your email</p>
+        </div>
+        
+        <p style="font-style: italic; color: var(--gold);">
+            Get ready to fuel your potential.
+        </p>
+        
+        <a href="/" class="cta-button">Return to Home</a>
+        
+        <div class="logo">HONEY FUEL</div>
+    </div>
+</body>
+</html>
