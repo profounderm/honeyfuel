@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
         :root {
             --amber-dark: #D4A574;
@@ -432,6 +433,11 @@
             box-shadow: 0 8px 24px var(--shadow);
         }
         
+        .checkout-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
         /* Footer */
         footer {
             background: var(--stone);
@@ -614,8 +620,8 @@
                     Honey Fuel delivers clean, sustained energy for athletes, professionals, and anyone who demands more from their day. 
                     One bottle. Seven ingredients. Zero compromise.
                 </p>
-                <div class="price">$24.99</div>
-                <button class="checkout-button" onclick="handleCheckout()">
+                <div class="price">$39.00</div>
+                <button class="checkout-button" id="checkout-btn" onclick="handleCheckout()">
                     <span>Secure Checkout</span>
                 </button>
                 <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--stone-light); text-align: center;">
@@ -635,6 +641,9 @@
     </footer>
 
     <script>
+        // Initialize Stripe
+        const stripe = Stripe('pk_live_51SqFFiQ1Pqo8kfTbyLj8FUAFUwUgqLbO9krB126Ld2h9kS3OJMo3i24OgGgvcv2MiLuZopHDz3IejFL2W8TQiUmT00ej9TYcQJ');
+        
         // Scroll reveal animation
         const revealElements = document.querySelectorAll('.reveal');
         
@@ -657,24 +666,35 @@
             document.getElementById('product').scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Checkout handler (placeholder for Stripe integration)
-        function handleCheckout() {
-            alert('Checkout integration ready!\n\nTo complete setup:\n1. Create a Stripe account at stripe.com\n2. Get your publishable key\n3. Replace the handleCheckout function with Stripe Checkout\n\nFor now, this is a demonstration of the checkout flow.');
+        // Stripe Checkout handler
+        async function handleCheckout() {
+            const button = document.getElementById('checkout-btn');
+            button.disabled = true;
+            button.querySelector('span').textContent = 'Loading...';
             
-            // Example Stripe integration code (uncomment and configure):
-            /*
-            const stripe = Stripe('your_publishable_key');
-            
-            stripe.redirectToCheckout({
-                lineItems: [{
-                    price: 'price_xxxxxxxxxxxxx', // Replace with your Price ID
-                    quantity: 1,
-                }],
-                mode: 'payment',
-                successUrl: window.location.origin + '/success',
-                cancelUrl: window.location.origin,
-            });
-            */
+            try {
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{
+                        price: 'price_1SqFvrQ1Pqo8kfTbhRDM5Yer',
+                        quantity: 1,
+                    }],
+                    mode: 'payment',
+                    successUrl: window.location.origin + '/success.html',
+                    cancelUrl: window.location.origin,
+                });
+                
+                if (error) {
+                    console.error('Stripe error:', error);
+                    alert('There was an issue redirecting to checkout. Please try again.');
+                    button.disabled = false;
+                    button.querySelector('span').textContent = 'Secure Checkout';
+                }
+            } catch (err) {
+                console.error('Checkout error:', err);
+                alert('There was an issue processing your request. Please try again.');
+                button.disabled = false;
+                button.querySelector('span').textContent = 'Secure Checkout';
+            }
         }
     </script>
 </body>
