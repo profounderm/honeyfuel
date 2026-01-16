@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey Fuel — Ancient Energy, Modern Performance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --amber-dark: #D4A574;
+            --amber-light: #F2D4A0;
+            --stone: #2A2520;
+            --stone-light: #4A4037;
+            --parchment: #F5F0E8;
+            --gold: #C9A961;
+            --shadow: rgba(42, 37, 32, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--parchment);
+            color: var(--stone);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Animated background texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(201, 169, 97, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: breathe 8s ease-in-out infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--parchment) 0%, transparent 100%);
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--stone);
+            text-transform: uppercase;
+        }
+        
+        .nav-cta {
+            background: var(--stone);
+            color: var(--parchment);
+            padding: 0.75rem 2rem;
+            border: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .nav-cta:hover {
+            background: var(--stone-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease-out 0.3s backwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            color: var(--stone);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 300;
+            margin-bottom: 3rem;
+            color: var(--stone-light);
+            letter-spacing: 0.02em;
+        }
+        
+        .hero-divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 3rem auto;
+            animation: expandWidth 1s ease-out 0.8s backwards;
+        }
+        
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 120px; }
+        }
+        
+        .hero-description {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--stone);
+            animation: fadeInUp 1.2s ease-out 0.6s backwards;
+        }
+        
+        /* Decorative geometric elements */
+        .geometric-accent {
+            position: absolute;
+            border: 1px solid var(--amber-dark);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        .geo-1 {
+            top: 15%;
+            left: 10%;
+            width: 200px;
+            height: 200px;
+            transform: rotate(45deg);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .geo-2 {
+            bottom: 20%;
+            right: 8%;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(45deg); }
+            50% { transform: translateY(-20px) rotate(45deg); }
+        }
+        
+        /* Philosophy Section */
+        .philosophy {
+            padding: 8rem 4rem;
+            background: var(--stone);
+            color: var(--parchment);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .philosophy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, rgba(212, 165, 116, 0.05) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30L0 30z' fill='%23D4A574' fill-opacity='0.02'/%3E%3C/svg%3E");
+            opacity: 0.4;
+        }
+        
+        .philosophy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 3rem;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+        
+        .philosophy-text {
+            font-size: 1.4rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .philosophy-text strong {
+            color: var(--amber-light);
+            font-weight: 500;
+        }
+        
+        /* Ingredients Section */
+        .ingredients {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+        
+        .ingredients-grid {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+        
+        .ingredient-card {
+            background: white;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ingredient-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--gold), var(--amber-dark));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .ingredient-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .ingredient-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px var(--shadow);
+        }
+        
+        .ingredient-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--stone);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .ingredient-description {
+            font-size: 1.1rem;
+            color: var(--stone-light);
+            line-height: 1.8;
+        }
+        
+        /* Product Section */
+        .product {
+            padding: 8rem 4rem;
+            background: linear-gradient(135deg, #F5F0E8 0%, #EDE6DA 100%);
+            position: relative;
+        }
+        
+        .product-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .product-image-placeholder {
+            background: white;
+            aspect-ratio: 3/4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--stone-light);
+            border: 2px dashed rgba(212, 165, 116, 0.3);
+            letter-spacing: 0.1em;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--amber-light) 0%, transparent 70%);
+            opacity: 0.1;
+            transform: translate(-50%, -50%);
+        }
+        
+        .product-details h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+        
+        .product-tagline {
+            font-size: 1.3rem;
+            color: var(--stone-light);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .product-description {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            margin-bottom: 3rem;
+            color: var(--stone);
+        }
+        
+        .price {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .checkout-button {
+            background: var(--stone);
+            color: var(--parchment);
+            padding: 1.2rem 3rem;
+            border: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .checkout-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+        }
+        
+        .checkout-button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+        
+        .checkout-button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .checkout-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--stone);
+            color: var(--parchment);
+            padding: 4rem 4rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-divider {
+            width: 100px;
+            height: 1px;
+            background: var(--gold);
+            margin: 2rem auto;
+            opacity: 0.5;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+            
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+            
+            .philosophy,
+            .ingredients,
+            .product {
+                padding: 5rem 2rem;
+            }
+            
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .ingredients-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .geo-1, .geo-2 {
+                display: none;
+            }
+        }
+        
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Honey Fuel</div>
+        <button class="nav-cta" onclick="scrollToCheckout()">Order Now</button>
+    </nav>
+
+    <section class="hero">
+        <div class="geometric-accent geo-1"></div>
+        <div class="geometric-accent geo-2"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">HONEY FUEL</h1>
+            <div class="hero-divider"></div>
+            <p class="hero-subtitle">Ancient Energy, Modern Performance</p>
+            <p class="hero-description">
+                Energy the body already understands. Pure fuel from the earth—no synthetic hype, no crash cycles. 
+                Just sustained power for the long haul.
+            </p>
+        </div>
+    </section>
+
+    <section class="philosophy">
+        <div class="philosophy-content reveal">
+            <h2 class="section-title">The Philosophy</h2>
+            <p class="philosophy-text">
+                <strong>Simplicity. Purity. Real fuel.</strong>
+            </p>
+            <p class="philosophy-text">
+                Built around honey—a fast, clean source of carbohydrates that supports physical performance, 
+                mental clarity, and sustained output without artificial stimulants.
+            </p>
+            <p class="philosophy-text">
+                No unnecessary additives. No synthetic compounds. Just efficient fuel drawn from proven, 
+                organic ingredients—designed for training, work, endurance, and long days that demand steady focus.
+            </p>
+        </div>
+    </section>
+
+    <section class="ingredients">
+        <div class="reveal">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;">Seven Ingredients</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: var(--stone-light); margin-bottom: 3rem;">
+                All Organic. All Intentional.
+            </p>
+        </div>
+        
+        <div class="ingredients-grid">
+            <div class="ingredient-card reveal">
+                <h3 class="ingredient-name">Raw Honey</h3>
+                <p class="ingredient-description">
+                    Fast-acting carbohydrates for immediate and sustained energy without blood sugar crashes.
+                </p>
+            </div>
+            
+            <div class="ingredient-card reveal">
+                <h3 class="ingredient-name">Ethiopian Dark Roast</h3>
+                <p class="ingredient-description">
+                    Natural caffeine for mental clarity and focus, sourced from ancient coffee traditions.
+                </p>
+            </div>
+            
+            <div class="ingredient-card reveal">
+                <h3 class="ingredient-name">Maca Root</h3>
+                <p class="ingredient-description">
+                    Adaptogenic support for endurance, stamina, and hormonal balance during physical stress.
+                </p>
+            </div>
+            
+            <div class="ingredient-card reveal">
+                <h3 class="ingredient-name">Cayenne Pepper</h3>
+                <p class="ingredient-description">
+                    Thermogenic activation to support circulation, metabolism, and sustained energy output.
+                </p>
+            </div>
+            
+            <div class="ingredient-card reveal">
+                <h3 class="ingredient-name">Himalayan Pink Salt</h3>
+                <p class="ingredient-description">
+                    Essential minerals and electrolytes for hydration and cellular function during exertion.
+                </p>
+            </div>
+            
+            <div class="ingredient-card reveal">
+                <h3 class="ingredient-name">Lemon Juice</h3>
+                <p class="ingredient-description">
+                    Vitamin C and alkalizing properties to support recovery and immune function.
+                </p>
+            </div>
+            
+            <div class="ingredient-card reveal">
+                <h3 class="ingredient-name">Distilled Water</h3>
+                <p class="ingredient-description">
+                    Pure hydration base, free from contaminants and unnecessary minerals.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="product" id="product">
+        <div class="product-container">
+            <div class="product-image-placeholder reveal">
+                PRODUCT IMAGE
+            </div>
+            
+            <div class="product-details reveal">
+                <h2>Fuel Your Potential</h2>
+                <p class="product-tagline">The energy you've been searching for.</p>
+                <p class="product-description">
+                    Honey Fuel delivers clean, sustained energy for athletes, professionals, and anyone who demands more from their day. 
+                    One bottle. Seven ingredients. Zero compromise.
+                </p>
+                <div class="price">$24.99</div>
+                <button class="checkout-button" onclick="handleCheckout()">
+                    <span>Secure Checkout</span>
+                </button>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--stone-light); text-align: center;">
+                    Free shipping on orders over $50
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="margin-bottom: 1rem;">HONEY FUEL</div>
+            <p style="font-style: italic; margin-bottom: 2rem;">Energy the body already understands</p>
+            <div class="footer-divider"></div>
+            <p class="footer-text">© 2025 Honey Fuel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+        
+        // Smooth scroll to checkout
+        function scrollToCheckout() {
+            document.getElementById('product').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Checkout handler (placeholder for Stripe integration)
+        function handleCheckout() {
+            alert('Checkout integration ready!\n\nTo complete setup:\n1. Create a Stripe account at stripe.com\n2. Get your publishable key\n3. Replace the handleCheckout function with Stripe Checkout\n\nFor now, this is a demonstration of the checkout flow.');
+            
+            // Example Stripe integration code (uncomment and configure):
+            /*
+            const stripe = Stripe('your_publishable_key');
+            
+            stripe.redirectToCheckout({
+                lineItems: [{
+                    price: 'price_xxxxxxxxxxxxx', // Replace with your Price ID
+                    quantity: 1,
+                }],
+                mode: 'payment',
+                successUrl: window.location.origin + '/success',
+                cancelUrl: window.location.origin,
+            });
+            */
+        }
+    </script>
+</body>
+</html>
